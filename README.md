@@ -11,27 +11,40 @@ Our work has been discussed in the PodBean podcast! [See here](https://papersrea
 ![Alt text](results/main.PNG?raw=true "results")
 
 ## Installation
-This code needs Python-3.7 or higher.
-```bash
-pip3 install torch==1.8.1+cpu torchvision==0.9.1+cpu torchaudio===0.8.1 -f https://download.pytorch.org/whl/torch_stable.html
-pip3 install -r requirements.txt
+1. Download and install the latest [Anaconda Python distribution](https://www.anaconda.com/distribution/#download-section)
+2. Execute the following commands to install all software requirements:
+```
+cd TranAD
+conda env create
 ```
 
 ## Dataset Preprocessing
-Preprocess all datasets using the command
+Change directory to the root of the source code directory and activate the `tran_ad` virtual environment:
+```
+cd TranAD
+conda activate tran_ad
+```
+
+Preprocess all datasets using the command:
 ```bash
-python3 preprocess.py SMAP MSL SWaT WADI SMD MSDS UCR MBA NAB
+python preprocess.py SMAP MSL SWaT WADI SMD MSDS UCR MBA NAB
 ```
 Distribution rights to some datasets may not be available. Check the readme files in the `./data/` folder for more details. If you want to ignore a dataset, remove it from the above command to ensure that the preprocessing does not fail.
 
 ## Result Reproduction
+Change directory to the root of the source code directory and activate the `tran_ad` virtual environment:
+```
+cd TranAD
+conda activate tran_ad
+```
+
 To run a model on a dataset, run the following command:
 ```bash
-python3 main.py --model <model> --dataset <dataset> --retrain
+python main.py --model <model> --dataset <dataset> --retrain
 ```
 where `<model>` can be either of 'TranAD', 'GDN', 'MAD_GAN', 'MTAD_GAT', 'MSCRED', 'USAD', 'OmniAnomaly', 'LSTM_AD', and dataset can be one of 'SMAP', 'MSL', 'SWaT', 'WADI', 'SMD', 'MSDS', 'MBA', 'UCR' and 'NAB. To train with 20% data, use the following command 
 ```bash
-python3 main.py --model <model> --dataset <dataset> --retrain --less
+python main.py --model <model> --dataset <dataset> --retrain --less
 ```
 You can use the parameters in `src/params.json` to set values in `src/constants.py` for each file. 
 
@@ -41,7 +54,7 @@ For ablation studies, use the following models: 'TranAD_SelfConditioning', 'Tran
 
 The output will provide anomaly detection and diagnosis scores and training time. For example:
 ```bash
-$ python3 main.py --model TranAD --dataset SMAP --retrain 
+$ python main.py --model TranAD --dataset SMAP --retrain 
 Using backend: pytorch
 Creating new model: TranAD
 Training TranAD on SMAP
